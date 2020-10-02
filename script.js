@@ -11,8 +11,13 @@ function fetchUsers(count) {
     });
 }
 
+function clear() {
+  mainDiv.innerHTML = "";
+}
+
 const downloadButton = document.querySelector(".download-button");
 downloadButton.addEventListener("click", () => {
+  clear();
   fetchUsers(input.value);
 });
 
@@ -29,10 +34,6 @@ function createUsers(users) {
 }
 
 const radioButtons = document.querySelectorAll('input[type="radio"]');
-
-function clear() {
-  mainDiv.innerHTML = "";
-}
 
 function radioListener(event) {
   if (!users) {
