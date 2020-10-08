@@ -1,28 +1,5 @@
 let users;
 
-const input = document.querySelector("input");
-
-function fetchUsers(count) {
-  fetch(`https://randomuser.me/api?results=${count}`)
-    .then((res) => res.json())
-    .then((res) => {
-      createUsers(res.results);
-      users = res.results;
-    });
-}
-
-function clear() {
-  mainDiv.innerHTML = "";
-}
-
-const downloadButton = document.querySelector(".download-button");
-downloadButton.addEventListener("click", () => {
-  clear();
-  fetchUsers(input.value);
-});
-
-const mainDiv = document.querySelector(".main");
-
 function createUser(user) {
   const userContainer = document.createElement("div");
   userContainer.innerText = `Jestem ${user.name.first}, mam lat ${user.dob.age}.`;
@@ -32,6 +9,29 @@ function createUser(user) {
 function createUsers(users) {
   users.forEach(createUser);
 }
+
+function clear() {
+  mainDiv.innerHTML = "";
+}
+
+function fetchUsers(count) {
+  fetch(`https://randomuser.me/api?results=${count}`)
+    .then((res) => res.json())
+    .then((res) => {
+      clear();
+      createUsers(res.results);
+      users = res.results;
+    });
+}
+
+const mainDiv = document.querySelector(".main");
+
+const input = document.querySelector("input");
+
+const downloadButton = document.querySelector(".download-button");
+downloadButton.addEventListener("click", () => {
+  fetchUsers(input.value);
+});
 
 const radioButtons = document.querySelectorAll('input[type="radio"]');
 
@@ -60,3 +60,19 @@ function radioListener(event) {
 radioButtons.forEach((input) => {
   input.addEventListener("change", radioListener);
 });
+
+const ukNationCheckbox = document.querySelector('#UK')
+
+const ukNationListener = (event) => {
+  if (ukNationCheckbox.checked === true && event.target.value === "UK"){
+    clear();
+    const ukNation = users.filter(user => user.nat === "UK");
+    createUsers(ukNation);
+  } else {
+    clear();
+    createUsers(users)
+  }
+}
+
+ukNationCheckbox.addEventListener('change', ukNationListener)
+
