@@ -38,30 +38,27 @@ const refreshUsers = (event) => {
     document.querySelectorAll('input[type="checkbox"]')
   );
   const radios = Array.from(document.querySelectorAll('input[type="radio"]'));
+  const dateInput = document.querySelector('input[type="date"]');
   const checkedNationalities = checkboxes
     .filter((checkbox) => checkbox.checked === true)
     .map((checkbox) => checkbox.value);
   const checkedRadio = radios.find((radio) => radio.checked).value;
+  const checkedDate = dateInput.valueAsNumber;
+
   if (checkedNationalities) {
-    const checkedNatUsers = users.filter(
+    const checkedUsers = users.filter(
       (user) =>
         checkedNationalities.includes(user.nat) &&
-        (checkedRadio === user.gender || checkedRadio === "all")
+        (checkedRadio === user.gender || checkedRadio === "all") &&
+        Date.parse(user.dob.date.slice(0, 10)) > checkedDate
     );
     clear();
-    createUsers(checkedNatUsers);
+    createUsers(checkedUsers);
   }
 };
 
 const checkInputs = document.querySelectorAll(
-  'input[type="checkbox"], input[type="radio"]'
+  'input[type="checkbox"], input[type="radio"], input[type="date"]'
 );
 
 checkInputs.forEach((input) => input.addEventListener("change", refreshUsers));
-
-const dateInput = document.querySelector('input[type="date"]');
-
-function dates() {
-  const checkedDate = dateInput.valueAsNumber;
-  const usersFilteredByAge = users.filter((user) => Date.parse(user.dob.date) > checkedDate);
-}
