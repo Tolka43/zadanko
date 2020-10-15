@@ -61,18 +61,25 @@ radioButtons.forEach((input) => {
   input.addEventListener("change", radioListener);
 });
 
-const ukNationCheckbox = document.querySelector('#GB')
+const checkboxes = Array.from(
+  document.querySelectorAll('input[type="checkbox"]')
+);
+const radios = Array.from(document.querySelectorAll('input[type="radio"]'));
 
-const ukNationListener = (event) => {
-  if (ukNationCheckbox.checked === true && event.target.value === "GB"){
+const refreshUsers = (event) => {
+  const checkedNationalities = checkboxes
+    .filter((checkbox) => checkbox.checked === true)
+    .map((checkbox) => checkbox.value);
+  const checkedRadio = radios.find((radio) => radio.checked);
+  if (checkedNationalities) {
+    const checkedNatUsers = users.filter((user) =>
+      checkedNationalities.includes(user.nat)
+    );
     clear();
-    const ukNation = users.filter(user => user.nat === "GB");
-    createUsers(ukNation);
-  } else {
-    clear();
-    createUsers(users)
+    createUsers(checkedNatUsers);
   }
-}
+};
 
-ukNationCheckbox.addEventListener('change', ukNationListener)
-
+checkboxes.forEach((checkbox) =>
+  checkbox.addEventListener("change", refreshUsers)
+);
