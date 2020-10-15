@@ -33,53 +33,28 @@ downloadButton.addEventListener("click", () => {
   fetchUsers(input.value);
 });
 
-const radioButtons = document.querySelectorAll('input[type="radio"]');
-
-function radioListener(event) {
-  if (!users) {
-    return;
-  }
-  if (event.target.value === "all") {
-    clear();
-    createUsers(users);
-    return;
-  }
-  if (event.target.value === "male") {
-    clear();
-    const male = users.filter((user) => user.gender === "male");
-    createUsers(male);
-    return;
-  }
-  if (event.target.value === "female") {
-    clear();
-    const female = users.filter((user) => user.gender === "female");
-    createUsers(female);
-  }
-}
-
-radioButtons.forEach((input) => {
-  input.addEventListener("change", radioListener);
-});
-
-const checkboxes = Array.from(
-  document.querySelectorAll('input[type="checkbox"]')
-);
-const radios = Array.from(document.querySelectorAll('input[type="radio"]'));
-
 const refreshUsers = (event) => {
+  const checkboxes = Array.from(
+    document.querySelectorAll('input[type="checkbox"]')
+  );
+  const radios = Array.from(document.querySelectorAll('input[type="radio"]'));
   const checkedNationalities = checkboxes
     .filter((checkbox) => checkbox.checked === true)
     .map((checkbox) => checkbox.value);
-  const checkedRadio = radios.find((radio) => radio.checked);
+  const checkedRadio = radios.find((radio) => radio.checked).value;
   if (checkedNationalities) {
-    const checkedNatUsers = users.filter((user) =>
-      checkedNationalities.includes(user.nat)
+    const checkedNatUsers = users.filter(
+      (user) =>
+        checkedNationalities.includes(user.nat) &&
+        (checkedRadio === user.gender || checkedRadio === "all")
     );
     clear();
     createUsers(checkedNatUsers);
   }
 };
 
-checkboxes.forEach((checkbox) =>
-  checkbox.addEventListener("change", refreshUsers)
+const checkInputs = document.querySelectorAll(
+  'input[type="checkbox"], input[type="radio"]'
 );
+
+checkInputs.forEach((input) => input.addEventListener("change", refreshUsers));
