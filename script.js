@@ -15,7 +15,7 @@ function clear() {
 }
 
 function fetchUsers(count) {
-  fetch(`https://randomuser.me/api?results=${count}`)
+  fetch(`https://randomuser.me/api?results=${count}&nat=gb,fr`)
     .then((res) => res.json())
     .then((res) => {
       clear();
@@ -61,12 +61,12 @@ radioButtons.forEach((input) => {
   input.addEventListener("change", radioListener);
 });
 
-const ukNationCheckbox = document.querySelector('#UK')
+const ukNationCheckbox = document.querySelector('#GB')
 
 const ukNationListener = (event) => {
-  if (ukNationCheckbox.checked === true && event.target.value === "UK"){
+  if (ukNationCheckbox.checked === true && event.target.value === "GB"){
     clear();
-    const ukNation = users.filter(user => user.nat === "UK");
+    const ukNation = users.filter(user => user.nat === "GB");
     createUsers(ukNation);
   } else {
     clear();
