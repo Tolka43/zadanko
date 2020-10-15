@@ -58,3 +58,10 @@ const checkInputs = document.querySelectorAll(
 );
 
 checkInputs.forEach((input) => input.addEventListener("change", refreshUsers));
+
+const dateInput = document.querySelector('input[type="date"]');
+
+function dates() {
+  const checkedDate = dateInput.valueAsNumber;
+  const usersFilteredByAge = users.filter((user) => Date.parse(user.dob.date) > checkedDate);
+}
