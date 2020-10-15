@@ -33,7 +33,7 @@ downloadButton.addEventListener("click", () => {
   fetchUsers(input.value);
 });
 
-const refreshUsers = (event) => {
+const refreshUsers = () => {
   const checkboxes = Array.from(
     document.querySelectorAll('input[type="checkbox"]')
   );
