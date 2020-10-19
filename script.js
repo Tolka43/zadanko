@@ -2,6 +2,7 @@ let users;
 
 function createUser(user) {
   const userContainer = document.createElement("div");
+  userContainer.classList.add('user-div', 'col')
   userContainer.innerText = `Jestem ${user.name.first}, mam lat ${user.dob.age}.`;
   mainDiv.appendChild(userContainer);
 }
@@ -45,7 +46,7 @@ const refreshUsers = () => {
   const checkedRadio = radios.find((radio) => radio.checked).value;
   const checkedDate = dateInput.valueAsNumber;
 
-  if (checkedNationalities) {
+  if (checkedNationalities.length > 0) {
     const checkedUsers = users.filter(
       (user) =>
         checkedNationalities.includes(user.nat) &&
