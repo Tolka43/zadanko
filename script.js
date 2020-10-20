@@ -1,10 +1,19 @@
 let users;
 
 function createUser(user) {
-  const userContainer = document.createElement("div");
-  userContainer.classList.add('user-div', 'col')
-  userContainer.innerText = `Jestem ${user.name.first}, mam lat ${user.dob.age}.`;
-  mainDiv.appendChild(userContainer);
+  const userCard = document.createElement("div");
+  userCard.classList.add("card", "col");
+  const userImage = document.createElement("img");
+  userImage.classList.add("card-img-top");
+  userImage.src = user.picture.large;
+  const userDescriptionDiv = document.createElement("div");
+  userDescriptionDiv.classList.add("card-body");
+  const userDescription = document.createElement("p");
+  userDescription.classList.add("card-text");
+  userDescription.innerText = `Jestem ${user.name.first}, mam lat ${user.dob.age}.`;
+  mainDiv.appendChild(userCard);
+  userCard.appendChild(userImage);
+  userCard.appendChild(userDescription);
 }
 
 function createUsers(users) {
