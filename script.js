@@ -4,12 +4,12 @@ function createUser(user) {
   const userCard = document.createElement("div");
   userCard.classList.add("card", "col");
   const userImage = document.createElement("img");
-  userImage.classList.add("card-img-top");
+  userImage.classList.add("card-img-top", 'user-image');
   userImage.src = user.picture.large;
   const userDescriptionDiv = document.createElement("div");
   userDescriptionDiv.classList.add("card-body");
-  const userDescription = document.createElement("p");
-  userDescription.classList.add("card-text");
+  const userDescription = document.createElement("h5");
+  userDescription.classList.add("card-title");
   userDescription.innerText = `Jestem ${user.name.first}, mam lat ${user.dob.age}.`;
   mainDiv.appendChild(userCard);
   userCard.appendChild(userImage);

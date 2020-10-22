@@ -14,11 +14,19 @@
   </head>
   <body>
     <div class="container">
-      <div class="main row row-cols-4"></div>
+      <div class="main row row-cols-5"></div>
     </div>
     <div>
       <button class="download-button btn btn-secondary">Pobierz</button>
       <input type="number" value="5" min="0" />
+    </div>
+    <div>
+      <label for="GB">GB</label>
+      <input type="checkbox" name="nation" id="GB" value="GB" checked />
+      <label for="US">US</label>
+      <input type="checkbox" name="nation" id="US" value="US" />
+      <label for="FR">FR</label>
+      <input type="checkbox" name="nation" id="FR" value="FR" />
     </div>
     <div class="btn-group btn-group-toggle" data-toggle="buttons">
       <label class="btn btn-secondary active">
@@ -31,14 +39,6 @@
       <label class="btn btn-secondary">
         <input type="radio" name="gender" id="female" value="female" /> Kobiety
       </label>
-    </div>
-    <div>
-      <label for="GB">GB</label>
-      <input type="checkbox" name="nation" id="GB" value="GB" checked />
-      <label for="US">US</label>
-      <input type="checkbox" name="nation" id="US" value="US" />
-      <label for="FR">FR</label>
-      <input type="checkbox" name="nation" id="FR" value="FR" />
     </div>
     <div><input type="date" name="" value="1900-01-01" id="" /></div>
     <script src="script.js"></script>
